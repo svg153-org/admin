@@ -22,9 +22,6 @@ repository:
 #     description: 'Added by safe-settings'
 #     color: 'ededed'
 
-teams:
-  - name: "all"
-    permission: "pull"
 
 # branches:
 #   # See https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection
