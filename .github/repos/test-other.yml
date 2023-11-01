@@ -1,6 +1,0 @@
-repository:
-  name: "test-other"
-  description: "Example of a other repository manage by safe-settings"
-  force_create: true
-  topics:
-    - "safe-settings"
