@@ -1,4 +1,4 @@
 repository:
   name: "repo-failed"
-  description: "repo-failed"
+  description: "repo-failed force change, not webhook configured"
   force_create: true
