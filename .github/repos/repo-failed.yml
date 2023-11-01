@@ -1,0 +1,4 @@
+repository:
+  name: "repo-failed"
+  description: "repo-failed"
+  force_create: true
