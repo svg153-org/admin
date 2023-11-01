@@ -23,8 +23,8 @@ repository:
 #     color: 'ededed'
 
 teams:
-  - name: all
-    permission: admin
+  - name: "all"
+    permission: "admin"
 
 # branches:
 #   # See https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection
