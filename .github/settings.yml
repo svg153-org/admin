@@ -24,7 +24,7 @@ repository:
 
 teams:
   - name: "all"
-    permission: "admin"
+    permission: "pull"
 
 # branches:
 #   # See https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection
