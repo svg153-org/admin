@@ -1,0 +1,43 @@
+# Check the schema in https://github.com/github/safe-settings
+repository:
+  auto_init: true
+  private: true
+  visibility: private
+  default_branch: main
+  has_issues: false
+  has_projects: false
+  has_discussions: false
+  has_wiki: false
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+  allow_auto_merge: true
+  allow_update_branch: false
+  delete_branch_on_merge: true
+  security:
+    enableVulnerabilityAlerts: true
+
+# labels:
+#   - name: 'added'
+#     description: 'Added by safe-settings'
+#     color: 'ededed'
+
+teams:
+  - name: all
+    permission: admin
+
+# branches:
+#   # See https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection
+#   - name: default
+#     protection:
+#       required_pull_request_reviews:
+#         required_approving_review_count: 1
+#         dismiss_stale_reviews: true
+#         require_code_owner_reviews: true
+#       required_status_checks: null
+#       enforce_admins: true
+#       restrictions: null
+#       allow_force_pushes: false
+#       allow_deletions: false
+#       block_creations: true
+#       required_conversation_resolution: true

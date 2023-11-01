@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  safe-settings:
+    image: 'ghcr.io/github/safe-settings:2.1.1-rc.1'
+    environment:
+      APP_ID: ${APP_ID}
+      LOG_LEVEL: ${LOG_LEVEL}
+      WEBHOOK_PROXY_URL: ${WEBHOOK_PROXY_URL}
+      PRIVATE_KEY: ${PRIVATE_KEY}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+    volumes:
+      - ./deployment-settings.yml:/opt/safe-settings/deployment-settings.yml
+    ports:
+      - 3000:3000

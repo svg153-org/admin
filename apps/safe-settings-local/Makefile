@@ -1,0 +1,18 @@
+.DEFAULT_GOAL := help
+
+help:
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  up        Start the Docker Compose service"
+	@echo "  down      Stop the Docker Compose service"
+	@echo "  logs      View the logs of the Docker Compose service"
+	@echo "  shell     Open a shell in the Docker Compose service"
+	@echo "  help      Show this help message"
+
+up: CMD=up -d
+down: CMD=down
+logs: CMD=logs -f $(DOCKER_COMPOSE_SERVICE)
+shell: CMD=exec $(DOCKER_COMPOSE_SERVICE) sh
+up down logs shell:
+	@docker compose -f docker-compose.yml $(CMD)
