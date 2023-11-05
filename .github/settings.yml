@@ -17,10 +17,10 @@ repository:
   security:
     enableVulnerabilityAlerts: true
 
-# labels:
-#   - name: 'added'
-#     description: 'Added by safe-settings'
-#     color: 'ededed'
+labels:
+  - name: 'added'
+    description: 'Added by safe-settings removing by all default'
+    color: 'ededed'
 
 teams:
   - name: "all"
