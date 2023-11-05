@@ -19,8 +19,23 @@ repository:
 
 # labels:
 #   - name: 'added'
-#     description: 'Added by safe-settings'
+#     description: 'Added by safe-settings removing all'
 #     color: 'ededed'
+labels:
+  # exclude:
+  #   - name: '^bug$'
+  #   - name: '^documentation$'
+  #   - name: '^duplicate$'
+  #   - name: '^enhancement$'
+  #   - name: '^good first issue$'
+  #   - name: '^help wanted$'
+  #   - name: '^invalid$'
+  #   - name: '^question$'
+  #   - name: '^wontfix$'
+  include:
+    - name: 'added'
+      description: 'Added to all repos by safe-settings'
+      color: 'ededed'
 
 teams:
   - name: "all"
