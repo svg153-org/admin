@@ -1,6 +1,18 @@
+# See https://github.com/github/safe-settings/blob/main-enterprise/docs/sample-settings/sample-deployment-settings.yml
 restrictedRepos:
   # You can exclude certain repos from safe-settings processing
   exclude: ['^admin$', '^repo1$', '^repo2$', '^repo3$']
   # Alternatively you can only include certain repos
   # include: ['^test$']
+overridevalidators:
+  - plugin: branches
+    error: |
+      `Branch protection required_approving_review_count cannot be overidden to a lower value`
+    script: |
+      console.log(`baseConfig ${JSON.stringify(baseconfig)}`)
+      console.log(`overrideConfig ${JSON.stringify(overrideconfig)}`)
+      if (baseconfig.protection.required_pull_request_reviews.required_approving_review_count && overrideconfig.protection.required_pull_request_reviews.required_approving_review_count ) {
+        return overrideconfig.protection.required_pull_request_reviews.required_approving_review_count >= baseconfig.protection.required_pull_request_reviews.required_approving_review_count
+      }
+      return true
 
