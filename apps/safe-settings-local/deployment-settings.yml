@@ -15,4 +15,13 @@ overridevalidators:
         return overrideconfig.protection.required_pull_request_reviews.required_approving_review_count >= baseconfig.protection.required_pull_request_reviews.required_approving_review_count
       }
       return true
-
+  - plugin: repository
+    error: |
+      `has_issues is not allowed`
+    script: |
+      console.log(`baseConfig ${JSON.stringify(baseconfig)}`)
+      console.log(`overrideConfig ${JSON.stringify(overrideconfig)}`)
+      if (overrideconfig.has_issues) {
+        return false
+      }
+      return true
