@@ -17,16 +17,16 @@ repository:
   archive_on_destroy: true
   security:
     enableVulnerabilityAlerts: true
-
 labels:
   - name: 'added'
     description: 'Added by safe-settings removing by all default'
     color: 'ededed'
-
+  - name: label-all-repos
+    description: Added by safe-setting
+    color: ededed
 teams:
   - name: "all"
     permission: "pull"
-
 # branches:
 #   # See https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection
 #   - name: default
