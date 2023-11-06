@@ -11,19 +11,14 @@ repository:
   allow_squash_merge: true
   allow_merge_commit: false
   allow_rebase_merge: false
-  allow_auto_merge: true
   allow_update_branch: false
   delete_branch_on_merge: true
-  archive_on_destroy: true
   security:
     enableVulnerabilityAlerts: true
 labels:
   - name: 'added'
     description: 'Added by safe-settings removing by all default'
     color: 'ededed'
-  - name: label-all-repos
-    description: Added by safe-setting
-    color: ededed
 teams:
   - name: "all"
     permission: "pull"
