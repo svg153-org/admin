@@ -1,6 +1,0 @@
-repository:
-  name: alvc
-  description: Example of a test repository manage by safe-settings
-  force_create: true
-  topics:
-    - safe-settings
