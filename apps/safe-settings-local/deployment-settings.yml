@@ -17,7 +17,7 @@ overridevalidators:
       return true
   - plugin: repository
     error: |
-      `has_issues is not allowed`
+      `has_issues is not allowed. Needs to be false`
     script: |
       console.log(`baseConfig ${JSON.stringify(baseconfig)}`)
       console.log(`overrideConfig ${JSON.stringify(overrideconfig)}`)
