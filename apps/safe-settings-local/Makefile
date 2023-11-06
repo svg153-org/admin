@@ -12,11 +12,11 @@ help:
 	@echo "  help      Show this help message"
 
 up: CMD=up -d
-down: CMD=down
+stop down: CMD=down
 restart: CMD=restart
 logs: CMD=logs -f $(DOCKER_COMPOSE_SERVICE)
 shell: CMD=exec $(DOCKER_COMPOSE_SERVICE) sh
-up down restart logs shell:
+up down stop restart logs shell:
 	@docker compose -f docker-compose.yml $(CMD)
 open:
 	@ngrok http 3000
