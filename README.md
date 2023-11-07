@@ -2,6 +2,10 @@
 
 There is a [Makefile](./Makefile) that has a few useful commands for the demo environment.
 
+## safe-settings app
+
+Go to [safe-settings-local](./apps/safe-settings-local) to see how to deploy the [github/safe-settings][github-safe-settings] in a local environment.
+
 ## GitHub as code
 
 Go to `./github/settings.yml` file to change the default settings for all repositories (or not excluded) y the organization.
@@ -21,3 +25,6 @@ For more details about the settings, please check the [sequence diagram](/assets
 ```bash
 make import-repo repo_name=<repo-name>
 ```
+
+<!-- Links -->
+[github-safe-settings]: https://github.com/github/safe-settings
