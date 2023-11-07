@@ -54,10 +54,10 @@ function add_repo_info() {
     enable_security_fixes=$(gh api repos/${org_name}/${repo_name}/automated-security-fixes)
     echo "    enableAutomatedSecurityFixes: $(echo ${enable_security_fixes} | jq -r '.enabled')" >> ${repo_file}
     enable_vulnerability_alerts=$(gh api repos/${org_name}/${repo_name}/vulnerability-alerts 2>/dev/null)
-    if [ -n "${enable_vulnerability_alerts}" ] && [ $(echo ${enable_vulnerability_alerts} | jq -r '.message') != "Vulnerability alerts are disabled." ]; then
+    enable_vulnerability_alerts_message=$(echo ${enable_vulnerability_alerts} | jq -r '.message')
+    if [ -n "${enable_vulnerability_alerts}" ] && [ "${enable_vulnerability_alerts_message}" != "Vulnerability alerts are disabled." ]; then
         echo "    enableVulnerabilityAlerts: true" >> ${repo_file}
     fi
-
 }
 
 function add_repo_info_prop() {
@@ -120,22 +120,17 @@ import_repo "${repo_info}" "${repo_file}" "${org_name}" "${repo_name}"
 echo "Labels"
 import_labels "${repo_info}" "${repo_file}" "${org_name}" "${repo_name}"
 
-echo "Collaborators"
-echo "TODO:"
+echo "Collaborators TODO"
 
-echo "Milestones"
-echo "TODO:"
+echo "Milestones TODO"
 
 echo "Teams"
 import_teams "${repo_info}" "${repo_file}" "${org_name}" "${repo_name}"
 
-echo "Branches"
-echo "TODO:"
+echo "Branches TODO"
 
-echo "Autolinks"
-echo "TODO:"
+echo "Autolinks TODO"
 
-echo "Environments"
-echo "TODO:"
+echo "Environments TODO"
 
 echo "Repository imported"
