@@ -25,3 +25,6 @@ labels:
 teams:
   - name: "all"
     permission: "pull"
+collaborators:
+  - username: samgh96
+    permission: admin
