@@ -119,3 +119,18 @@ endif
 	@git switch main
 	@git branch -D make-repo-public-$(repo_name)
 
+import-repo:
+	@echo "Create new branch for $(repo_name)"
+	@git switch -c import-repo-$(repo_name)
+	@echo "Import repository $(repo_name)"
+	@cd .github/repos && ./import-repo.sh $(repo_name) && cd ../..
+	@echo "Repository imported"
+	@git add .github/repos/$(repo_name).yml
+	@git commit -m "Import $(repo_name)"
+	@git push -u origin import-repo-$(repo_name)
+	@echo "Configuration pushed"
+	@gh pr create --title "Import $(repo_name)" --body "Import $(repo_name)" --fill
+	@echo "Pull request created"
+	@gh pr view --web
+	@git switch main
+	@git branch -D import-repo-$(repo_name)
