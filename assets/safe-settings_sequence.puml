@@ -1,0 +1,98 @@
+@startuml
+box "GitHub Admin Repo"
+participant "Admin PR" order 2
+participant "Admin repo config" order 2
+participant "Admin main branch" order 2
+end box
+box "GitHub Org"
+participant "Org config" order 4
+participant "GitHub safe-settings App" order 4
+end box
+participant "safe-settings" order 3
+
+== Changes by PR ==
+box "Users"
+participant Bob order 1
+participant Alice order 1
+end box
+
+group PR
+    Bob -> "Admin PR" : push code + create PR
+    activate "Admin PR"
+    "Admin PR" -> "GitHub safe-settings App" : webhook
+    "GitHub safe-settings App" -> "safe-settings" : webhook
+    activate "safe-settings"
+    "safe-settings" -> "Admin PR" : create check result in merge commit
+    group Check state for PR
+        "safe-settings" -> "safe-settings" : validate config
+        activate "safe-settings"
+        deactivate "safe-settings"
+        "safe-settings" -> "Org config" : get actual state (only for PR changes)
+        activate "safe-settings"
+        "safe-settings" <- "Org config" : return actual state
+        deactivate "safe-settings"
+        "safe-settings" -> "safe-settings" : check diff
+        activate "safe-settings"
+        deactivate "safe-settings"
+    end
+    "safe-settings" -> "Admin PR" : validate + dry run
+    deactivate "safe-settings"
+    Alice -> "Admin PR" : approve and merge
+    "Admin PR" -> "Admin main branch" : merge
+    deactivate "Admin PR"
+end
+group merge commit
+    "Admin main branch" -> "GitHub safe-settings App" : webhook
+    "GitHub safe-settings App" -> "safe-settings" : webhook
+    activate "safe-settings"
+    "safe-settings" -> "Admin main branch" : create check result in merge commit
+    group Check state for merge commit
+        activate "Admin main branch"
+        "safe-settings" -> "safe-settings" : validate config
+        activate "safe-settings"
+        deactivate "safe-settings"
+        "safe-settings" -> "Org config" : get actual state (only for merge commit changes)
+        activate "safe-settings"
+        "safe-settings" <- "Org config" : return actual state
+        deactivate "safe-settings"
+        "safe-settings" -> "safe-settings" : check diff
+        activate "safe-settings"
+        deactivate "safe-settings"
+    end
+    "safe-settings" -> "Org config" : apply
+    activate "safe-settings"
+    "safe-settings" -> "Admin main branch" : create check result in merge commit
+    deactivate "safe-settings"
+    deactivate "safe-settings"
+    deactivate "Admin main branch"
+end
+
+== periodically converge the settings ==
+
+"safe-settings" -> "safe-settings" : CRON
+group Check Org state
+    activate "safe-settings"
+    "safe-settings" -> "safe-settings" : validate config
+    activate "safe-settings"
+    deactivate "safe-settings"
+    "safe-settings" -> "Org config" : get actual state for all organization
+    activate "safe-settings"
+    "safe-settings" <- "Org config" : return actual state
+    deactivate "safe-settings"
+    "safe-settings" -> "safe-settings" : check diff
+    activate "safe-settings"
+    deactivate "safe-settings"
+end
+"safe-settings" -> "Org config" : apply
+deactivate "safe-settings"
+
+@enduml
+
+
+' group My own label
+' Alice -> Log : Log attack start
+'     loop 1000 times
+'         Alice -> Bob: DNS Attack
+'     end
+' Alice -> Log : Log attack end
+' end
