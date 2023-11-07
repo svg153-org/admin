@@ -1,12 +1,23 @@
 .DEFAULT_GOAL := help
+.PHONY: help new-repo add-label-to-repo add-label-to-all add-collaborator-to-all make-repo-public
 
 help:
-	@echo "Usage: make [target] repo_name=<name>"
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Targets for safe-settings demo"
+	@echo ""
+	@echo "Requirements:"
+	@echo "  - gh (GitHub CLI) installed and loged in"
+	@echo "  - yq (YAML processor) installed"
+	@echo "  - git installed and configured"
 	@echo ""
 	@echo "Targets:"
-	@echo "  new-repo            Create a new repository"
-	@echo "  add-label-to-repo   Add a label to a repository"
-	@echo "  add-label-to-all    Add a label to all repositories"
+	@echo "  new-repo repo_name=<name>                 Create a new repository"
+	@echo "  add-label-to-repo repo_name=<name>        Add a label to a repository"
+	@echo "  add-label-to-all                          Add a label to all repositories"
+	@echo "  add-collaborator-to-all                   Add a collaborator to all repositories"
+	@echo "  make-repo-public repo_name=<name>         Make a repository public"
+	@echo "  help                                      Show this help"
 
 new-repo:
 ifndef repo_name
@@ -58,17 +69,53 @@ endif
 	@git branch -D add-label-for-$(repo_name)
 
 add-label-to-all:
-	@echo "Create new branch for all-label-to-all"
-	@git switch -c all-label-to-all
+	@echo "Create new branch for add-label-to-all"
+	@git switch -c add-label-to-all
 	@echo "Add label to all repositories"
-	@ yq eval '.labels += [{"name": "label-all-repos", "description": "Added by safe-setting", "color": "ededed"}]' -i .github/settings.yml
+	@yq eval '.labels += [{"name": "label-all-repos", "description": "Added by safe-setting", "color": "ededed"}]' -i .github/settings.yml
 	@echo "Label added"
 	@git add .github/settings.yml
 	@git commit -m "Add label to all repositories"
-	@git push -u origin all-label-to-all
+	@git push -u origin add-label-to-all
 	@echo "Configuration pushed"
 	@gh pr create --title "Add label to all repositories" --body "Add label to all repositories" --fill
 	@echo "Pull request created"
 	@gh pr view --web
 	@git switch main
-	@git branch -D all-label-to-all
+	@git branch -D add-label-to-all
+
+add-collaborator-to-all:
+	@echo "Create new branch for add-collaborator-to-all"
+	@git switch -c add-collaborator-to-all
+	@echo "Add collaborator to all repositories"
+	@yq eval '.collaborators += [{"username": "JavierCane", "permission": "admin"}]' -i .github/settings.yml
+	@echo "Collaborator added"
+	@git add .github/settings.yml
+	@git commit -m "Add collaborator to all repositories"
+	@git push -u origin add-collaborator-to-all
+	@echo "Configuration pushed"
+	@gh pr create --title "Add collaborator to all repositories" --body "Add collaborator to all repositories" --fill
+	@echo "Pull request created"
+	@gh pr view --web
+	@git switch main
+	@git branch -D add-collaborator-to-all
+
+make-repo-public:
+ifndef repo_name
+	$(error repo_name is not set)
+endif
+	@echo "Create new branch for $(repo_name)"
+	@git switch -c make-repo-public-$(repo_name)
+	@echo "Make repository $(repo_name) public"
+	@yq eval '.repository.private = false' -i .github/repos/$(repo_name).yml
+	@echo "Repository made public"
+	@git add .github/repos/$(repo_name).yml
+	@git commit -m "Make $(repo_name) public"
+	@git push -u origin make-repo-public-$(repo_name)
+	@echo "Configuration pushed"
+	@gh pr create --title "Make $(repo_name) public" --body "Make $(repo_name) public" --fill
+	@echo "Pull request created"
+	@gh pr view --web
+	@git switch main
+	@git branch -D make-repo-public-$(repo_name)
+
