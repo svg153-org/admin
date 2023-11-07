@@ -4,3 +4,8 @@ repository:
   force_create: true
   topics:
     - safe-settings
+
+labels:
+  - name: test-label
+    description: Example of a test label
+    color: '000000'
