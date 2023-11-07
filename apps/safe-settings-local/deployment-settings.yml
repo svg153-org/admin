@@ -25,3 +25,10 @@ overridevalidators:
         return false
       }
       return true
+configvalidators:
+  - plugin: collaborators
+    error: |
+      `Admin role cannot be assigned to collaborators`
+    script: |
+      console.log(`baseConfig ${JSON.stringify(baseconfig)}`)
+      return baseconfig.permission != 'admin'
