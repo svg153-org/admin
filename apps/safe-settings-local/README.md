@@ -2,7 +2,7 @@
 
 ## Create the GitHub safe-settings App
 
-TL;DR: Check this [video to see how to create the GitHub App](https://www.youtube.com/watch?v=KmAyPUv9gOY), but with this permissions and events.
+TL;DR: Check this [video to see how to create the GitHub App](https://youtu.be/L7XKNMlZK8s?si=5wZTTRf8mDY9BFpp&t=222), but with these permissions and events.
 
 ### Steps
 
