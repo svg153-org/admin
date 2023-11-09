@@ -2,5 +2,6 @@ repository:
   name: test-repo
   description: Example of a test repository manage by safe-settings
   force_create: true
+  has_issues: true
   topics:
     - safe-settings
