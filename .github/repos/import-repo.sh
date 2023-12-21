@@ -118,6 +118,7 @@ echo "Repository"
 import_repo "${repo_info}" "${repo_file}" "${org_name}" "${repo_name}"
 
 echo "Labels"
+# Same with https://github.com/micnncim/label-exporter
 import_labels "${repo_info}" "${repo_file}" "${org_name}" "${repo_name}"
 
 echo "Collaborators TODO"
